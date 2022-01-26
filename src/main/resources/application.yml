@@ -1,0 +1,13 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/task_apelsin
+    username: postgres
+    password: 1
+  main:
+    allow-circular-references: true
+  jpa:
+    hibernate:
+      ddl-auto: create
+    generate-ddl: true
