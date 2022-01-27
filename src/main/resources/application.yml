@@ -9,5 +9,5 @@ spring:
     allow-circular-references: true
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     generate-ddl: true

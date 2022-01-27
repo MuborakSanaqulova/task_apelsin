@@ -17,12 +17,12 @@ public class Order {
     @Transient
     private static final String seqName = "order_seq";
 
-    @javax.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = seqName)
     @SequenceGenerator(sequenceName = seqName, name = seqName, allocationSize = 1)
     private Integer id;
 
-    private LocalDate localDate;
+    private LocalDate date;
 
     @ManyToOne
     private Customer customer;

@@ -14,7 +14,7 @@ public class Detail {
     @Transient
     private static final String seqName = "detail_seq";
 
-    @javax.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = seqName)
     @SequenceGenerator(sequenceName = seqName, name = seqName, allocationSize = 1)
     private Integer id;
@@ -22,7 +22,7 @@ public class Detail {
     @ManyToOne
     private Product product;
 
-    @ManyToOne
+    @OneToOne
     private Order order;
 
     private Integer quantity;
