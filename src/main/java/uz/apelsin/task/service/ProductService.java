@@ -1,4 +1,19 @@
 package uz.apelsin.task.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import uz.apelsin.task.model.Product;
+import uz.apelsin.task.payload.ProductDto;
+
+import java.util.Optional;
+
 public interface ProductService {
+
+    Page<ProductDto> findAllDto(Pageable pageable);
+
+    Page<Product> findAllEntity(Pageable pageable);
+
+    Optional<ProductDto> getOneDto(Integer id);
+
+    Optional<Product> getOneEntity(Integer id);
 }
