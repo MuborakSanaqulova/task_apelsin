@@ -12,7 +12,7 @@ public interface CategoryService {
 
     Page<Category> findAllEntity(Pageable pageable);
 
-    Optional<CategoryDto> getOneDto(Integer id);
+    Optional<CategoryDto> getCategoryByProductIdDto(Integer productId);
 
-    Optional<Category> getOneEntity(Integer id);
+    Optional<Category> getCategoryByProductIdEntity(Integer productId);
 }

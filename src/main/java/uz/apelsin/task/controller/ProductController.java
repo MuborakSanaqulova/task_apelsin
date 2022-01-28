@@ -6,13 +6,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import uz.apelsin.task.common.Response;
 import uz.apelsin.task.model.enums.Status;
-import uz.apelsin.task.payload.CategoryDto;
 import uz.apelsin.task.payload.ProductDto;
 import uz.apelsin.task.service.ProductService;
 
@@ -28,15 +24,15 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public ResponseEntity<?> getAll(@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
         Page<ProductDto> productDtos = productService.findAllDto(pageable);
         return ResponseEntity.ok(new Response(productDtos, Status.SUCCESS));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getOne(@PathVariable Integer id) {
-        Optional<ProductDto> productDto = productService.getOneDto(id);
+    @GetMapping
+    public ResponseEntity<?> getOne(@RequestParam Integer product_id) {
+        Optional<ProductDto> productDto = productService.getOneDto(product_id);
 
         if (productDto.isEmpty())
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("product not found");

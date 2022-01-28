@@ -16,4 +16,8 @@ public interface ProductService {
     Optional<ProductDto> getOneDto(Integer id);
 
     Optional<Product> getOneEntity(Integer id);
+
+    Optional<Product> findById(Integer productId);
+
+    Optional<Product> findProductByOrderId(Integer orderId);
 }

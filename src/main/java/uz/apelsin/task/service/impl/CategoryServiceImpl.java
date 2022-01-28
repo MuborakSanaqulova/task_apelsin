@@ -34,12 +34,12 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Optional<CategoryDto> getOneDto(Integer id) {
-        return getOneEntity(id).map(categoryMapper::toDto);
+    public Optional<CategoryDto> getCategoryByProductIdDto(Integer productId) {
+        return getCategoryByProductIdEntity(productId).map(categoryMapper::toDto);
     }
 
     @Override
-    public Optional<Category> getOneEntity(Integer id) {
-        return categoryRepository.findById(id);
+    public Optional<Category> getCategoryByProductIdEntity(Integer productId) {
+        return categoryRepository.findCategoryByProductId(productId);
     }
 }

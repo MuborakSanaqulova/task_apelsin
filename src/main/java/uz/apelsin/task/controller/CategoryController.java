@@ -24,15 +24,15 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public ResponseEntity<?> getAll(@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
         Page<CategoryDto> categoryDtos = categoryService.findAllDto(pageable);
         return ResponseEntity.ok(new Response(categoryDtos, Status.SUCCESS));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getOne(@PathVariable Integer id) {
-        Optional<CategoryDto> categoryDto = categoryService.getOneDto(id);
+    @GetMapping
+    public ResponseEntity<?> getCategoryByProductId(@RequestParam Integer product_id) {
+        Optional<CategoryDto> categoryDto = categoryService.getCategoryByProductIdDto(product_id);
 
         if (categoryDto.isEmpty())
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("product not found");

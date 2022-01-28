@@ -42,4 +42,14 @@ public class ProductServiceImpl implements ProductService {
     public Optional<Product> getOneEntity(Integer id) {
         return productRepository.findById(id);
     }
+
+    @Override
+    public Optional<Product> findById(Integer productId) {
+        return productRepository.findById(productId);
+    }
+
+    @Override
+    public Optional<Product> findProductByOrderId(Integer orderId) {
+        return productRepository.findByOrderId(orderId);
+    }
 }
