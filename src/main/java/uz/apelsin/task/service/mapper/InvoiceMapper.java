@@ -9,10 +9,10 @@ import uz.apelsin.task.utility.EntityMapper;
 @Mapper(componentModel = "spring", uses = OrderMapper.class)
 public interface InvoiceMapper extends EntityMapper<InvoiceDto, Invoice> {
 
-    @Mapping(target = "orderDto", source = "order")
+    @Mapping(target = "orderDto", source = "orders")
     InvoiceDto toDto(Invoice invoice);
 
-    @Mapping(target = "order", source = "orderDto")
+    @Mapping(target = "orders", source = "orderDto")
     Invoice toEntity(InvoiceDto invoiceDto);
 
 }

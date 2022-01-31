@@ -23,7 +23,7 @@ public class Detail {
     private Product product;
 
     @OneToOne
-    private Order order;
+    private Orders orders;
 
     private Integer quantity;
 }

@@ -1,7 +1,6 @@
 package uz.apelsin.task.payload;
 
 import lombok.Data;
-import uz.apelsin.task.model.Order;
 
 import java.time.LocalDate;
 

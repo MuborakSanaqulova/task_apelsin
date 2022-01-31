@@ -9,11 +9,11 @@ import uz.apelsin.task.utility.EntityMapper;
 @Mapper(componentModel = "spring", uses = {OrderMapper.class, ProductMapper.class})
 public interface DetailMapper extends EntityMapper<DetailDto, Detail> {
 
-    @Mapping(target = "orderDto", source = "order")
+    @Mapping(target = "orderDto", source = "orders")
     @Mapping(target = "productDto", source = "product")
     DetailDto toDto(Detail detail);
 
-    @Mapping(target = "order", source = "orderDto")
+    @Mapping(target = "orders", source = "orderDto")
     @Mapping(target = "product", source = "productDto")
     Detail toEntity(DetailDto detailDto);
 

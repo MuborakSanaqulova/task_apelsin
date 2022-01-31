@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -23,7 +22,7 @@ public class Invoice {
     private Integer id;
 
     @OneToOne
-    private Order order;
+    private Orders orders;
 
     private Double amount;
 

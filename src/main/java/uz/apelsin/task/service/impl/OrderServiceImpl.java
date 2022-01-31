@@ -1,8 +1,11 @@
 package uz.apelsin.task.service.impl;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import uz.apelsin.task.model.*;
 import uz.apelsin.task.payload.OrderDetailProductNameDto;
+import uz.apelsin.task.payload.OrderDto;
 import uz.apelsin.task.payload.OrderRequestDto;
 import uz.apelsin.task.payload.OrderResponseDto;
 import uz.apelsin.task.repository.OrderRepository;
@@ -42,14 +45,14 @@ public class OrderServiceImpl implements OrderService {
         if (product.isEmpty() || customer.isEmpty())
             return Optional.empty();
 
-        Order order = new Order();
-        order.setDate(LocalDate.now());
-        customer.ifPresent(order::setCustomer);
+        Orders orders = new Orders();
+        orders.setDate(LocalDate.now());
+        customer.ifPresent(orders::setCustomer);
 
-        Order finalOrder = save(order);
+        Orders finalOrders = save(orders);
 
         Invoice invoice = new Invoice();
-        invoice.setOrder(finalOrder);
+        invoice.setOrders(finalOrders);
         invoice.setAmount(product.get().getPrice() * orderRequestDto.getQuantity());
         invoice.setIssued(LocalDate.now());
         invoice.setDue(LocalDate.now().plusDays(10));
@@ -59,7 +62,7 @@ public class OrderServiceImpl implements OrderService {
         Detail detail = new Detail();
         detail.setQuantity(orderRequestDto.getQuantity());
         detail.setProduct(product.get());
-        detail.setOrder(finalOrder);
+        detail.setOrders(finalOrders);
 
         detailService.save(detail);
 
@@ -67,14 +70,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order save(Order order) {
-        return orderRepository.save(order);
+    public Orders save(Orders orders) {
+        return orderRepository.save(orders);
     }
 
     @Override
     public Optional<OrderDetailProductNameDto> getOrderAndProductName(Integer order_id) {
 
-        Optional<Order> optionalOrder = orderRepository.findById(order_id);
+        Optional<Orders> optionalOrder = orderRepository.findById(order_id);
         Optional<Product> productByOrderId = productService.findProductByOrderId(order_id);
 
         if (productByOrderId.isEmpty() || optionalOrder.isEmpty())
@@ -87,5 +90,14 @@ public class OrderServiceImpl implements OrderService {
         orderDetailProductNameDto.setCustomerDto(customerMapper.toDto(optionalOrder.get().getCustomer()));
 
         return Optional.of(orderDetailProductNameDto);
+    }
+
+    // task 3
+    @Override
+    public Page<OrderDto> getOrdersWithoutDetails(Pageable pageable) {
+
+        Page<Orders> orderWithoutDetails = orderRepository.findOrderWithoutDetails(pageable);
+
+        return orderWithoutDetails.map(orderMapper::toDto);
     }
 }
