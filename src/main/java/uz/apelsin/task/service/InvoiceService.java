@@ -4,7 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import uz.apelsin.task.model.Invoice;
 import uz.apelsin.task.payload.InvoiceDto;
-import uz.apelsin.task.projection.OverPaidInvoicesDto;
+import uz.apelsin.task.projection.OverPaidInvoicesProjection;
 import uz.apelsin.task.projection.WrongDateInvoiceDto;
 
 import java.util.List;
@@ -22,5 +22,5 @@ public interface InvoiceService {
 
     Page<WrongDateInvoiceDto> getWrongDateInvoices(Pageable pageable);
 
-    List<OverPaidInvoicesDto> getOverpaidInvoices();
+    List<OverPaidInvoicesProjection> getOverpaidInvoices();
 }

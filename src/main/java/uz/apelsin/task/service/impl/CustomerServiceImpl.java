@@ -5,10 +5,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import uz.apelsin.task.model.Customer;
 import uz.apelsin.task.payload.CustomerDto;
+import uz.apelsin.task.projection.CustomerLastOrdersProjection;
+import uz.apelsin.task.projection.NumberOfProductsInYearProjection;
 import uz.apelsin.task.repository.CustomerRepository;
 import uz.apelsin.task.service.CustomerService;
 import uz.apelsin.task.service.mapper.CustomerMapper;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,5 +39,19 @@ public class CustomerServiceImpl implements CustomerService {
         Page<Customer> customersWithoutOrders = customerRepository.findCustomersWithoutOrders(pageable);
 
         return customersWithoutOrders.map(customerMapper::toDto);
+    }
+
+
+    // task 5
+    @Override
+    public List<CustomerLastOrdersProjection> getCustomersLastOrders() {
+        return customerRepository.getCustomersLastOrders();
+    }
+
+
+    // task 9
+    @Override
+    public List<NumberOfProductsInYearProjection> getNumberOfProductsInYear() {
+        return customerRepository.getNumberOfProductsInYear();
     }
 }

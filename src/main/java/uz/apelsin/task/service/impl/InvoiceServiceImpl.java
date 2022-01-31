@@ -1,12 +1,11 @@
 package uz.apelsin.task.service.impl;
 
-import org.apache.catalina.LifecycleState;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import uz.apelsin.task.model.Invoice;
 import uz.apelsin.task.payload.InvoiceDto;
-import uz.apelsin.task.projection.OverPaidInvoicesDto;
+import uz.apelsin.task.projection.OverPaidInvoicesProjection;
 import uz.apelsin.task.projection.WrongDateInvoiceDto;
 import uz.apelsin.task.repository.InvoiceRepository;
 import uz.apelsin.task.service.InvoiceService;
@@ -62,7 +61,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     //6
     @Override
-    public List<OverPaidInvoicesDto> getOverpaidInvoices() {
+    public List<OverPaidInvoicesProjection> getOverpaidInvoices() {
 
         return invoiceRepository.findOverPaidInvoices();
     }

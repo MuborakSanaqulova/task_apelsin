@@ -8,12 +8,14 @@ import uz.apelsin.task.payload.OrderDetailProductNameDto;
 import uz.apelsin.task.payload.OrderDto;
 import uz.apelsin.task.payload.OrderRequestDto;
 import uz.apelsin.task.payload.OrderResponseDto;
+import uz.apelsin.task.projection.OrdersWithoutInvoicesProjection;
 import uz.apelsin.task.repository.OrderRepository;
 import uz.apelsin.task.service.*;
 import uz.apelsin.task.service.mapper.CustomerMapper;
 import uz.apelsin.task.service.mapper.OrderMapper;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -100,4 +102,13 @@ public class OrderServiceImpl implements OrderService {
 
         return orderWithoutDetails.map(orderMapper::toDto);
     }
+
+
+    //task 10
+    @Override
+    public List<OrdersWithoutInvoicesProjection> getOrdersWithoutInvoices() {
+        return orderRepository.getOrdersWithoutInvoices();
+    }
+
+
 }

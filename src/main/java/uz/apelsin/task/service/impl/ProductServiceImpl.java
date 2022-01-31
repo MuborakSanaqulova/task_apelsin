@@ -5,10 +5,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import uz.apelsin.task.model.Product;
 import uz.apelsin.task.payload.ProductDto;
+import uz.apelsin.task.projection.BulkProductsProjection;
+import uz.apelsin.task.projection.HighDemandProductsProjection;
 import uz.apelsin.task.repository.ProductRepository;
 import uz.apelsin.task.service.ProductService;
 import uz.apelsin.task.service.mapper.ProductMapper;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -51,5 +54,18 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Optional<Product> findProductByOrderId(Integer orderId) {
         return productRepository.findByOrderId(orderId);
+    }
+
+    //task 7
+    @Override
+    public List<HighDemandProductsProjection> getHighDemandProducts() {
+        return  productRepository.findHighDemandProducts();
+    }
+
+
+    //task 8
+    @Override
+    public List<BulkProductsProjection> getBulkProducts() {
+        return productRepository.findBulkProducts();
     }
 }

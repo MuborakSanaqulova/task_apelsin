@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import uz.apelsin.task.model.Invoice;
-import uz.apelsin.task.projection.OverPaidInvoicesDto;
+import uz.apelsin.task.projection.OverPaidInvoicesProjection;
 import uz.apelsin.task.projection.WrongDateInvoiceDto;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Integer> {
     Page<WrongDateInvoiceDto> findWrongDateInvoices(Pageable pageable);
 
     //6
-    @Query(value ="SELECT new uz.apelsin.task.projection.OverPaidInvoicesDto(p.invoice.id, sum(p.amount)) from Payment p group by p.invoice.id")
-    List<OverPaidInvoicesDto> findOverPaidInvoices();
+    @Query(value ="select i.id as invoiceId, ((select sum(amount) from payment where invoice_id = i.id)-i.amount) as reimbursed  from invoice i where i.amount < (select sum(amount) from payment where invoice_id = i.id)", nativeQuery = true)
+    List<OverPaidInvoicesProjection> findOverPaidInvoices();
 
 }

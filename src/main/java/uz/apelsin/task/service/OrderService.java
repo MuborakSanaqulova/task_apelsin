@@ -7,7 +7,9 @@ import uz.apelsin.task.payload.OrderDetailProductNameDto;
 import uz.apelsin.task.payload.OrderDto;
 import uz.apelsin.task.payload.OrderRequestDto;
 import uz.apelsin.task.payload.OrderResponseDto;
+import uz.apelsin.task.projection.OrdersWithoutInvoicesProjection;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface OrderService {
@@ -19,4 +21,6 @@ public interface OrderService {
     Optional<OrderDetailProductNameDto> getOrderAndProductName(Integer order_id);
 
     Page<OrderDto> getOrdersWithoutDetails(Pageable pageable);
+
+    List<OrdersWithoutInvoicesProjection> getOrdersWithoutInvoices();
 }
